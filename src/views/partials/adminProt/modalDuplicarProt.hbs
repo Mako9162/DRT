@@ -1,0 +1,77 @@
+<div class="modal fade bd-example-modal-lg" id="modalDuplicarProt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="tituloDuplicarProt"></h3>
+            </div>
+            <div class="modal-body">
+                <form id="formDuplicarProt">
+                    <div class="row">
+                        <div class="form-group col-md-6 m-t-1 ">
+                            <label class="form-label" for="sduplicarTipo">Seleccione un tipo de protocolo:</label>
+                            <select class="form-control" id="sduplicarTipo" name="sduplicarTipo" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                {{#each tipoProtocolo}}
+                                    <option value="{{ID}}">{{DESCRIPCION}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 m-t-1">
+                            <label class="form-label" for="sduplicarProt">Seleccione un protocolo:</label>
+                            <select class="form-control" id="sduplicarProt" name="sduplicarProt" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 m-t-1">
+                            <label class="form-label" for="sduplicarEquipo">Seleccione un tipo de equipo:</label>
+                            <select class="form-control" id="sduplicarEquipo" name="sduplicarEquipo" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                {{#each tipo_equipo}}
+                                    <option value="{{ID}}">{{DESCRIPCION}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 m-t-1">
+                            <label class="form-label" for="sduplicarNewProt">Nuevo protocolo:</label>
+                            <input type="text" class="form-control" id="sduplicarNewProt" name="sduplicarNewProt" placeholder="Ingrese el nombre del nuevo protocolo" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardarDuplicarProt">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Modal header */
+#modalDuplicarProt .modal-header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: #fff;
+    border-bottom: 2px solid #1a252f;
+    padding: 15px 20px;
+    position: relative;
+}
+
+#modalDuplicarProt .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Close button */
+#modalDuplicarProt .close {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 24px;
+    transition: opacity 0.3s ease;
+}
+
+#modalDuplicarProt .close:hover {
+    opacity: 1;
+}
+</style>

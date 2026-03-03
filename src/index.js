@@ -1,0 +1,98 @@
+const express = require('express');
+const morgan = require('morgan');
+const exphbs = require('express-handlebars');
+const path = require('path');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
+const { database } = require('./keys.js');
+const cors = require('cors');
+const fs = require('fs');
+const max = path.resolve(__dirname, "./maximo.txt");
+require('./routes/cronJobs');
+require('./routes/cronJobs1');
+require('./routes/cronJobs2');
+
+// Inicializar app
+const app = express();
+require('./lib/passport');
+
+// Configuraciones
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.engine('.hbs', exphbs.engine({
+    defaultLayout: 'main',
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs',
+    helpers: require('./lib/handlebars')
+}));
+app.set('view engine', '.hbs');
+app.use(express.static(path.join(__dirname, 'views', 'js')));
+
+// Middlewares
+app.use(cors());
+app.use(session({
+    secret: 'sapma',
+    resave: true,
+    saveUninitialized: false,
+    store: new MySQLStore(database)
+}));
+app.use((req, res, next) => {
+    if (req.path !== '/verificar_sesion') {
+        req.session.lastActive = Date.now();
+    }
+    next();
+});
+app.use(flash());
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true, limit: '500mb', parameterLimit: 2000000 }));
+app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Control de caché
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    res.set('Pragma', 'no-cache');
+    next();
+});
+
+// Variables globales
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.message = req.flash('message');
+    res.locals.user = req.user;
+    res.locals.maximo = parseInt(fs.readFileSync(max, 'utf8'));
+    next();
+});
+
+// Rutas
+app.use(require('./routes'));
+app.use(require('./routes/authentication'));
+app.use(require('./routes/protocolos'));
+app.use(require('./routes/aprobaciones'));
+app.use(require('./routes/rechazos'));
+app.use(require('./routes/reportes'));
+app.use(require('./routes/pdfs'));
+app.use(require('./routes/equipos'));
+app.use(require('./routes/anulaciones'));
+app.use(require('./routes/admin'));
+app.use(require('./routes/adminprot'));
+app.use(require('./routes/planificacion'));
+app.use(require('./routes/pendientes'));
+app.use(require('./routes/hallazgos'));
+app.use(require('./routes/reparaciones/reparacionesRoutes.js'));
+app.use(require('./routes/adminProt/adminProt'));
+
+// Archivos públicos e imágenes
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
+// Inicio de servidor
+var server = app.listen(app.get('port'), () => {
+    console.log('Servidor en línea. Puerto:', app.get('port'));
+});
+server.timeout = 1000000; // Tiempo de espera en milisegundos

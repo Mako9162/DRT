@@ -1,0 +1,38 @@
+
+<style>
+  .modal-dialog.custom-width {
+    width: 60% !important; 
+    max-width: none !important; 
+  }
+
+  @media (min-width: 768px) {
+    .modal-lg {
+      width: 60% !important; 
+    }
+  }
+</style>
+
+<div class="modal fade bd-example-modal-lg" id="manual" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg custom-width"> 
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong><h3 class="modal-title" id="titulo_tarea"></h3></strong>
+        <input type="text" id="id_Tarea" hidden="true">
+      </div>
+      <div class="modal-body">
+        <section id="infoTarea" class="card box-typical">
+          <div class="card-block">
+            <br><br>
+            <ul class="nav nav-tabs" id="chapterTabs" role="tablist"></ul>
+            <br>
+            <div class="tab-content" id="chapterContent"></div>
+            <br>
+            <button type="button" id="updateButton" class="btn btn-success float-right">Enviar</button>
+          </div>
+
+        </section>
+      </div>                        
+    </div>
+  </div>
+</div>
+

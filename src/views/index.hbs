@@ -1,0 +1,135 @@
+<style>
+    body{
+        background-color: #fff;
+    }
+    .button-87 {
+        margin: auto;
+        padding: 10px 25px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 500;
+        box-shadow: 0px 0px 14px -7px rgba(141,153,174,1);
+        background-image: linear-gradient(45deg, rgba(39,55,70,1) 0%, rgb(80, 88, 101) 51%, rgba(39,55,70,1) 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-87:hover {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-87:active {
+        transform: scale(0.95);
+    }
+
+    #login-image {
+        background-image: url('sapmaLogin.png');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    /* Centrar el formulario en la columna */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Asegurarse de que ocupe todo el alto de la pantalla */
+    }
+
+    .form-box {
+        width: 100%;
+        max-width: 400px; /* Ajusta el ancho máximo del formulario */
+    }
+
+    /* Media queries para pantallas pequeñas */
+    @media (max-width: 768px) {
+        #login-image {
+            display: none;
+        }
+
+        .form-container {
+            height: auto; /* Restablecer la altura en pantallas pequeñas */
+            margin-top: 50px; /* Añadir un poco de margen superior para separar el contenido */
+        }
+    }
+
+    
+    .titulo {
+        font-size: 25px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Columna izquierda con el formulario -->
+        <div class="col-md-6 form-container">
+            <div class="form-box">
+                <form class="" action="/login" method="post">
+                    <div>
+                        <center><img src="2.png" alt="" id="imgtipo" style="width: 30%;"></center>
+                    </div>
+                    <br>
+                    <div class="">
+                        <h4><center>Bienvenido Nuevamente</center></h4>
+                        <h5 class="titulo"><center><strong>SAPMA-DRT</strong></center></h5>
+                    </div>
+                    <br>
+                    {{> message }}
+                    <div class="form-group">
+                        <input type="text" id="Login" name="Login" class="form-control" placeholder="Usuario"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="Clave" name="Clave" class="form-control" placeholder="Contraseña"/>
+                    </div>
+                    <br>
+                    <button type="submit" class="button-87">Acceder</button>
+                    <hr>
+                    <center><a class="" href="/reset_pass">¿Olvidaste tu contraseña?</a></center>
+                    <br>
+                    <center><a class="">© 2025 Innovación y Desarrollo</a></center>               
+                </form>
+            </div>
+        </div>
+
+        <!-- Columna derecha con la imagen (solo visible en pantallas grandes) -->
+        <div class="col-md-6 hidden-xs hidden-sm" id="login-image">
+        </div>
+    </div>
+</div>
+<script src="/js/lib/jquery/jquery.min.js"></script>
+<script src="/js/lib/tether/tether.min.js"></script>
+<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins.js"></script>
+<script type="text/javascript" src="/js/lib/match-height/jquery.matchHeight.min.js"></script>
+<script>
+    $(function() {
+        $('.page-center').matchHeight({
+            target: $('html')
+        });
+
+        $(window).resize(function(){
+            setTimeout(function(){
+                $('.page-center').matchHeight({ remove: true });
+                $('.page-center').matchHeight({
+                    target: $('html')
+                });
+            },100);
+        });
+    });
+</script>
+<script src="/js/app.js"></script>

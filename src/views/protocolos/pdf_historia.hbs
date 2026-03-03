@@ -1,0 +1,93 @@
+<style>
+    /* Estilos básicos */
+    body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 12px;
+        color: #333;
+    }
+    .timeline {
+        margin: 5px 0;
+        padding-left: 20px;
+        position: relative;
+    }
+    .timeline-date-group {
+        margin-bottom: 20px;
+    }
+    .timeline-date-group h4 {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #050505;
+        border-bottom: 2px solid #6c757d;
+        padding-bottom: 5px;
+    }
+    .timeline-item {
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 20px;
+    }
+    .timeline-item::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-color: #030303;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        position: absolute;
+        left: -8px;
+        top: 5px;
+    }
+    .timeline-time {
+        font-size: 0.9em;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .timeline-content {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .timeline-content h5 {
+        margin: 0 0 10px;
+        font-size: 1em;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #6c757d;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+    }
+    .timeline-content p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #252627;
+    }
+</style>
+<body>
+    <section>
+        <div class="timeline">
+            {{#each historial}}
+                <div class="timeline-date-group">
+                    <h4>{{fecha}}</h4>
+                    {{#each eventos}}
+                        <div class="timeline-item">
+                            <div class="timeline-time">
+                                {{hora}}
+                                <span class="timeline-user">
+                                    <i class="glyphicon glyphicon-user"></i> {{usuario}}
+                                </span>
+                            </div>
+                            <div class="timeline-content">
+                                <h5>{{titulo}}</h5>
+                                <p>{{comentario}}</p>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    </section>
+</body>

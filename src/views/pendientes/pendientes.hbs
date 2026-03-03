@@ -1,0 +1,105 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Tareas pendientes</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Tareas</li>
+								<li class="active">tareas pendientes</li>
+							</ol>
+						</div>
+						<div class="form-group float-right">
+                            <button type="button" class="btn btn-rounded btn-warning" id="b_pdf" name="b_pdf" hidden="true"><i class="fa fa-file-pdf-o"></i></button>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="box-typical box-typical-padding">
+                <section class="card box-typical" style="min-height: 120px;" id="encabezado">
+                    <div class="card-block">
+						<div class="row m-b-2"> 
+							<div class="col-md-12 col-sm-6 m-b-2"><h5 class="m-t-lg with-border">Paso 1 - Generación de archivo</h5></div>
+							<div class="col-md-2">
+								<label class="form-label" for="date3">Seleccione año</label>
+								<select class="form-control" name="date3" id="date3">
+									<option value="" disabled selected>Seleccione un año</option>
+									{{#each fecha_anio}}
+										<option value="{{Anio}}">{{Anio}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<div class="col-md-2">
+								<label class="form-label" for="date4">Seleccione mes</label>
+								<select class="form-control" name="date4" id="date4">
+									<option value="" disabled selected>Seleccione un mes</option>
+								</select> 
+							</div>
+							<div class="col-md-2">
+								<label class="form-label" for="gerencia">Seleccione gerencia</label>
+								<select class="form-control" name="gerencia" id="gerencia">
+									<option value="" disabled selected>Seleccione una gerencia</option>
+									{{#each gerencias}}
+										<option value="{{Id}}">{{Descripcion}}</option>
+									{{/each}}	
+								</select> 
+							</div>
+							<div class="col-md-2">
+								<label class="form-label" for="area">Seleccione Area</label>
+								<select class="form-control" name="area" id="area">
+									<option value="" disabled selected>Seleccione un area</option>
+								</select> 
+							</div>
+							<div class="col-md-2">
+								<label class="form-label" for="sector">Seleccione Sector</label>
+								<select class="form-control" name="sector" id="sector">
+									<option value="" disabled selected>Seleccione un sector</option>
+								</select> 
+							</div>
+							<div class="col-md-2">
+								<label class="form-label" for="buscar" style="color: aliceblue;">.</label>
+								<button type="button" name="buscar" id="buscar" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Generar excel</button>
+							</div>
+						</div>
+					</div>
+                </section>
+                <section class="card box-typical" style="min-height: 120px;" id="cuerpo">
+                    <div class="card-block">
+						<div class="row m-b-2"> 
+							<div class="col-md-12 col-sm-6 m-b-2"><h5 class="m-t-lg with-border">Paso 2 - Carga de archivo</h5></div>
+							<div class="col-md-6">
+								<label class="form-label" for="archivo">Archivo</label>
+								<input type="file" class="form-control" id="archivo" name="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+							</div>
+							<div class="col-md-6">
+								<label class="form-label" for="enviar" style="color: aliceblue;">.</label>
+								<button type="button" name="enviar" id="enviar" class="btn btn-primary">Enviar</button>
+							</div>
+						</div>
+					</div>
+                </section>
+			</div>
+		</div>	
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+    <script src="/sessions.js"></script>
+	<script src="/pendientes.js"></script>
+
+</body>

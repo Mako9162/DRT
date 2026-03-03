@@ -1,0 +1,132 @@
+
+<div class="modal fade bd-example-modal-lg" id="historia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>            
+                <h4 class="modal-title" id="historia_titulo"></h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" hidden="true" value="" id="histo_id" >
+            {{#ifAny user.Id_Perfil "2" "9"}}
+                <a href="/detalle_tareas" class="btn btn-inline btn-success btn-sm float-right" data-task-id="" target="_blank" >Detalle</a>
+            {{/ifAny}}   
+                <button class="btn btn-inline btn-sm btn-default float-right" id="print">Imprimir</button> 
+                <div class="timeline"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+/* Línea de tiempo general */
+.timeline {
+    margin: 20px 0;
+    padding-left: 20px;
+    position: relative;
+    max-height: 600px; /* Límite de altura para el contenedor */
+}
+
+/* Agrupación de fechas */
+.timeline-date-group {
+    margin-bottom: 20px;
+}
+
+.timeline-date-group h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #050505;
+    margin: 15px 0;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 5px;
+}
+
+/* Eventos dentro de una fecha */
+.timeline-item {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color: #030303;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    left: -8px;
+    top: 5px;
+}
+
+/* Hora y usuario en una línea */
+.timeline-time {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #050505;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Separación con el contenido */
+}
+
+.timeline-user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.timeline-user-icon {
+    color: #6c757d;
+    font-size: 1.2em;
+}
+
+/* Título del evento */
+.timeline-content h5 {
+    font-size: 1em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #939496; /* Fondo gris elegante */
+    padding: 10px;
+    margin: 0; /* Eliminamos márgenes */
+    border-radius: 5px 5px 0 0; /* Redondeo superior */
+}
+
+/* Contenedor del contenido */
+.timeline-content {
+    margin-left: 20px; /* Alineación con la viñeta */
+    background: #ffffff; /* Fondo blanco limpio */
+    border: 1px solid #dee2e6; /* Borde suave */
+    border-radius: 5px; /* Redondeo completo */
+    overflow: hidden; /* Para evitar que el contenido sobresalga */
+    padding: 0; /* Eliminamos padding externo para que el título lo controle */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Texto debajo del título (comentario) */
+.timeline-content p {
+    font-size: 0.9em;
+    color: #252627;
+    margin: 10px; /* Espaciado interno */
+    padding: 0;
+}
+
+
+/* Hover del contenido */
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal ajustes para scroll */
+.modal-body {
+    max-height: 700px;
+    overflow-y: auto;
+}
+</style>
+

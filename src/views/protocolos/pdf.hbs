@@ -1,0 +1,223 @@
+<body>
+<style>
+	
+body {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #2b2d42;
+}
+
+h6 {
+	font-size: 12px;
+}
+
+h5 {
+	font-size: 14px;
+}
+
+label {
+	font-size: 12px;
+}
+.doc-titulo {
+	margin-bottom: 15px;
+}
+
+.doc-titulo h5 {
+	font-weight: bold;
+	border-bottom: 1px solid rgb(227, 227, 227);
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+
+table {
+	width: 100%;
+	margin-bottom: 1rem;
+	color: #333;
+	border-collapse: collapse;
+}
+
+table th,
+table td {
+	padding: 0.75rem;
+	vertical-align: top;
+	border: 1px solid #dee2e6;
+}
+
+table th {
+	text-align: center;
+	background-color: #f8f9fa;
+	font-size: 10px;
+}
+
+table td {
+	text-align: center;
+	font-size: 10px;
+}
+
+.descripcion-encabezado {
+	column-count: 2;
+	column-gap: 10px;
+}
+
+.descripcion-encabezado .item {
+	break-inside: avoid-column; /* Evita que los elementos se dividan en columnas */
+	margin-bottom: 2px; /* Espacio entre elementos */
+}
+
+.descripcion-encabezado .contenido {
+	display: flex; /* Utiliza flexbox para alinear los elementos */
+}
+
+.descripcion-encabezado h6,
+.descripcion-encabezado label {
+	margin: 5px; /* Elimina los márgenes predeterminados */
+	padding: 0; /* Elimina el relleno predeterminado */
+	flex: 1; /* Permite que los elementos ocupen el espacio disponible */
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    width: 50%;
+    box-sizing: border-box; 
+    padding: 10px; 
+}
+
+.imgti {
+    margin-bottom: 10px; 
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 250px; 
+    overflow: hidden; 
+    border: 1px solid #dee2e6;
+    padding: 5px; 
+    box-sizing: border-box; 
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}
+</style>
+	<section>
+		<div class="card-block">
+			<div class="card-body">{{#if tarea_origen}}
+					<div class="doc-titulo" >
+						<h5>INFORMACION DE PROTOCOLO ORIGEN</h5>
+					</div>
+					<br>
+					<div class="descripcion-encabezado">
+						<div class="item">
+							<div class="contenido">
+								<h6>01. Protocolo N° :</h6>
+								<label>{{tarea_origen}} / {{protocolo_origen}}</label>
+							</div>
+							<div class="contenido">
+								<h6>02. Estado :</h6>
+								<label>{{estado_origen}}</label>
+							</div>
+							<div class="contenido">
+								<h6>03. Observaciones EST :</h6>
+								<label>{{obs_origen}}</label>
+							</div>
+						</div>
+					</div>
+					<br>
+				{{/if}}
+				{{#if imagenes_origen}}	
+					<div class="doc-titulo" >
+						<h5>IMAGENES PROTOCOLO ORIGEN</h5>
+					</div>
+					<div class="image-container">
+						{{#each imagenes_origen }}
+							<div class="image-item">
+								<div class="imgti">
+									<h6>Adjunto {{incitement @index}}</h6>
+								</div>
+								<div class="image-wrapper">
+									<img src="{{this}}" alt="imagenes" width="250" height="250">
+								</div>
+							</div>
+						{{/each }}
+					</div>
+				{{/if}}	
+				{{#group prot by="TR_PROT_DESC_CAPI"}}
+					<div class="doc-titulo" >
+						<h5>{{value}}</h5>
+					</div>
+					<br>
+					<div class="descripcion-encabezado">
+						{{#each items as |item|}}
+								<div class="item">
+									<div class="contenido">
+										<h6>{{ TR_PROT_CAPTURA}} :</h6>
+										<label>{{fixEncoding TR_RESPUESTA}}</label>
+									</div>
+								</div>
+						{{/each}}
+					</div>
+					<br>
+				{{/group}}
+				{{#if imagenes}}	
+					<div class="doc-titulo" >
+						<h5>IMAGENES</h5>
+					</div>
+					<div class="image-container">
+						{{#each imagenes }}
+							<div class="image-item">
+								<div class="imgti">
+									<h6>Adjunto {{incitement @index}}</h6>
+								</div>
+								<div class="image-wrapper">
+									<img src="{{this}}" alt="imagenes" width="250" height="250">
+								</div>
+							</div>
+						{{/each }}
+					</div>
+				{{/if}}
+				<br>
+				<div class="doc-titulo" >
+					<h5>APROBACIONES</h5>
+				</div>
+				<br>
+				<div class="descripcion-encabezado">
+					<div class="item">
+						<div class="contenido">
+							<h6>Lider TURNO:</h6>
+							{{#if turno}}
+							<label>{{turno}}  /  {{fechaturno}}</label>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+				<div class="descripcion-encabezado">
+						<div class="item">
+							<div class="contenido">
+								<h6>Lider SPCI:</h6>
+								{{#if spci}}
+								<label>{{spci}}  /  {{fechaspci}}</label>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="descripcion-encabezado">
+						<div class="item">
+							<div class="contenido">
+								<h6>Cliente:</h6>
+								{{#if clienteAprob}}
+								<label>{{clienteAprob}}  /  {{fechacliente}}</label>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>	
+		</div>
+	</section>
+</body>
+

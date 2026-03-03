@@ -1,0 +1,96 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Detalle de tarea</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Tareas</li>
+								<li class="active">Detalle de tarea</li>
+							</ol>
+						</div>
+						<div class="form-group float-right">
+                            <button type="button" class="btn btn-rounded btn-warning" id="b_pdf" name="b_pdf" hidden="true"><i class="fa fa-file-pdf-o"></i></button>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="box-typical box-typical-padding">
+				<section class="card box-typical" style="min-height: 120px;" id="encabezado">
+                    <div class="card-block">
+						<div class="row"> 
+							<br>
+							<div class="col-md-2">
+								<input class="form-control" id="tarea" name="tarea" placeholder="Ingrese un ID de Tarea">
+							</div>
+							<div class="col-md-3">
+								<button type="button" name="buscar" id="buscar" class="btn btn-primary">Buscar</button>
+							</div>
+						</div>
+					</div>
+                </section>
+				<section class="card box-typical" id="tabla_prot11">
+					<div class="card-block">
+						<form action="">
+							<table id="tabla_prot1" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+								<thead>
+									<tr>
+										<th>Id Tarea</th>
+										<th>Fecha</th>
+										<th>Codigo Sapma</th>	
+										<th>Tag DMH</th>										
+										<th>Estado</th>
+										<th hidden="true">Id Protocolo</th>
+										<th>Protocolo</th>
+										<th>Técnico</th>  
+										<th>Gerencia</th>
+										<th>Area</th>
+										<th>Sector</th>    
+										<th>Modificaciones</th>                                          
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</section>
+				<section id="infoTarea" class="card box-typical" style="display:none;">
+					<div class="card-block">
+						<div>
+							<button type="button" id="updateButton" class="btn btn-default btn-sm float-right">Actualizar</button>
+							<button type="button" id="historial_tarea" class="btn btn-inline btn-sm btn-default float-right">Historial tarea</button>
+						</div>
+						<br><br>
+						<ul class="nav nav-tabs" id="chapterTabs" role="tablist"></ul>
+						<br>
+						<div class="tab-content" id="chapterContent"></div>
+					</div>
+				</section>
+			</div>
+		</div>	
+		{{> cambios_respuestas}}
+		{{> ver_cambios}}
+		{{> historia_tarea1}}
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.min.js"></script>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+    <script src="/sessions.js"></script>
+	<script src="/ingreso.js"></script>
+</body>

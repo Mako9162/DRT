@@ -1,0 +1,146 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Tareas Rechazadas</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Tareas</li>
+								<li class="active">Tareas Rechazadas</li>
+							</ol>
+						</div>
+						<div class="form-group float-right">
+                            <button type="button" class="btn btn-rounded btn-warning" id="pdfs" name="pdfs" hidden="true" ><i class="fa fa-file-pdf-o"></i></button>
+							<button type="button" class="btn btn-rounded btn-warning" id="pdfs1" name="pdfs1" hidden="true" ><i class="fa fa-file-pdf-o"></i></button>
+						</div>
+					</div>
+				</div>
+				<style>
+						.miClase {
+							font-family: Verdana, Geneva, Tahoma, sans-serif;
+							font-size: 12px; /* Cambia el tamaño de la fuente a 14px */
+						}
+						.dataTables_filter {
+							float: left;
+						}
+						.dt-buttons {
+							float: right;
+						}
+					</style>
+			</header>
+			<div class="box-typical box-typical-padding">
+				<input type="text" value="{{user.Id_Perfil}}" id="perfil" hidden="true">
+				<section class="card box-typical">
+					<div class="card-block">
+						<table id="tabla_prot" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+							<thead>
+								<tr>
+									<th>Tarea</th>
+									<th>Fecha</th>
+									<th>Estado de tarea</th>
+									<th>Tipo de servicio</th>
+									<th>Codigo Sapma</th>
+									<th>Tag DMH</th>
+									<th>Gerencia</th>
+									<th>Area</th>
+									<th>Sector</th>
+									<th>Detalle de ubicación</th>
+									<th>Ubicación técnica</th>
+									<th>Estado equipo</th>
+									<th>Observación Estado</th>
+									<th>Repuestos</th>
+									<th hidden="true">Tarea anterior</th>
+									<th hidden="true">Fecha anterior</th>
+									<th hidden="true">Estado anterior</th>
+									<th>Observación validador</th>
+									<th>Observaciones</th>
+									<th>Ver</th>
+								</tr>
+							<tbody>		
+								{{#ifAny user.Id_Perfil "4" "5" "6" "7" "8"}}
+									{{#each listas}}
+									<tr>
+										<td>{{IdTarea}}</td>
+										<td>{{FechaTarea}}</td>
+										<td>{{EstadoDesc}}</td>
+										<td>{{TipoServicio}}</td>
+										<td>{{EquipoCodigoTAG}}</td>
+										<td>{{EquipoTagDMH}}</td>
+										<td>{{GerenciaDesc}}</td>
+										<td>{{AreaDesc}}</td>
+										<td>{{SectorDesc}}</td>
+										<td>{{DetalleUbicacion}}</td>
+										<td></td>
+										<td>{{EstadoOperEquipo}}</td>
+										<td>{{EstadoOperEquipoObs}}</td>
+										<td>{{Repuestos}}</td>
+										<td hidden="true">{{IdTarea_Ant}}</td>
+										<td hidden="true">{{FechaTarea_Ant}}</td>
+										<td hidden="true">{{EstadoOperEquipo_Ant}}</td>
+										<td>{{ValidacionObservacion}}</td>
+										<td><input class="form-control" id="obs" name="obs" maxlength="300"></input></td>
+										<td><center><a href="/protocolo/{{ IdTarea }}" class="btn btn-inline btn-primary btn-sm ladda-button" target="_blank"><i class="fa fa-file-archive-o"></i></a></center></td>	
+									</tr>
+									{{/each}}
+								{{/ifAny}}
+								{{#ifAny user.Id_Perfil "2" "9"}}
+									{{#each listas}}
+									<tr>
+										<td><center><a href="#" class="historial">{{IdTarea}}</a></center></td>
+										<td>{{FechaTarea}}</td>
+										<td>{{EstadoDesc}}</td>
+										<td>{{TipoServicio}}</td>
+										<td>{{EquipoCodigoTAG}}</td>
+										<td>{{EquipoTagDMH}}</td>
+										<td>{{GerenciaDesc}}</td>
+										<td>{{AreaDesc}}</td>
+										<td>{{SectorDesc}}</td>
+										<td>{{DetalleUbicacion}}</td>
+										<td></td>
+										<td>{{EstadoOperEquipo}}</td>
+										<td>{{EstadoOperEquipoObs}}</td>
+										<td>{{Repuestos}}</td>
+										<td hidden="true">{{IdTarea_Ant}}</td>
+										<td hidden="true">{{FechaTarea_Ant}}</td>
+										<td hidden="true">{{EstadoOperEquipo_Ant}}</td>
+										<td>{{ValidacionObservacion}}</td>
+										<td><input class="form-control" id="obs" name="obs" maxlength="300"></input></td>
+										<td><center><a href="/protocolo/{{ IdTarea }}" class="btn btn-inline btn-primary btn-sm ladda-button" target="_blank"><i class="fa fa-file-archive-o"></i></a></center></td>	
+									</tr>
+									{{/each}}
+								{{/ifAny}}											
+							</tbody>
+						</table>
+					</div>
+				</section>
+				{{#ifAny user.Id_Perfil "2" "4" "5" "6" "7" "8" "9"}}
+				<button type="button" class="btn btn-primary" id="mensaje">Agregar observación</button>
+				<button type="button" class="btn btn-success float-right" id="aprob">Aprobar</button>	
+				{{/ifAny}}
+			</div>
+		</div>	
+		{{> codigo_aprobacion2}}
+		{{> codigo_aprobacion3}}
+		{{> historia_tarea}}
+	</div>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+	<script src="/sessions.js"></script>
+	<script src="/rechazos.js"></script>
+</body>

@@ -1,0 +1,31 @@
+<div class="modal fade" id="respuesta" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="respuesta_titulo"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" name="idRespuesta" id="idRespuesta" hidden="true">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" id="descripcion" placeholder="Escribe una descripción" required>
+        </div>
+
+        <!-- Sección de Opciones -->
+        <div class="form-group">
+          <label>Opciones</label>
+          <div id="opciones-container">
+            <!-- se inyectan aquí los inputs -->
+          </div>
+          <button type="button" class="btn btn-sm btn-success" id="add-opcion">
+            <i class="fa fa-plus"></i> Opción
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="guardar" hidden="true">Guardar</button>
+        <button type="button" class="btn btn-primary" id="actualizar" hidden="true">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

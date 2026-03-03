@@ -1,0 +1,123 @@
+<div class="modal fade bd-example-modal-lg" id="modal_equipo_nuevo" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h3 class="modal-title" id="titulo_equipo"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="card-block">
+                        <div class="row m-t-1" id="registro_equipo"  style="display: none;">   
+                            <div class="col-md-4">
+                                <label class="form-label" for="tagEquipo">Tag</label>
+                                <input type="text" class="form-control" id="tagEquipo" name="tagEquipo" placeholder="Ingrese un Tag de equipo" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="serieEquipo">Serie</label>
+                                <input type="text" class="form-control" id="serieEquipo" name="serieEquipo" placeholder="Ingrese una serie" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="certificacionEquipo">Certificacion</label>
+                                <input type="text" class="form-control" id="certificacionEquipo" name="certificacionEquipo" placeholder="Ingrese una certificacion" required>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="criticoEquipo">Critico</label>
+                                <select class="select2" id="criticoEquipo" name="criticoEquipo">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="tipoEquipo">Tipo de Equipo</label>
+                                <select class="select2" id="tipoEquipo" name="tipoEquipo">
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="agenteEquipo">Agente</label>
+                                <select class="select2" id="agenteEquipo" name="agenteEquipo">
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="mmEquipo">Marca - Modelo</label>
+                                <select class="select2" id="mmEquipo" name="mmEquipo">
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="phEquipo">PH</label>
+                                <input type="text" class="form-control" id="phEquipo" name="phEquipo" required>
+                            </div>
+                            <div class="col-md-2 m-t-1">
+                                <label class="form-label" for="pesoEquipo">Peso</label>
+                                <input type="text" class="form-control" id="pesoEquipo" name="pesoEquipo" required>
+                            </div>
+                            <div class="col-md-2 m-t-1">
+                                <label class="form-label" for="medidaEquipo">Medida</label>
+                                <select class="select2" id="medidaEquipo" name="medidaEquipo">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option value="Kg">Kg</option>
+									<option value="g">g</option>
+									<option value="Oz">Oz</option>
+									<option value="Psi">Psi</option>
+									<option value="L">L</option>
+									<option value="ml">ml</option>
+									<option value="Lbs">Lbs</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 m-t-1">
+                                <label class="form-label" for="ubicacionEquipo">Detalle de ubicación</label>
+                                <input type="text" class="form-control" id="ubicacionEquipo" name="ubicacionEquipo" placeholder="Ingrese una ubicación" required>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="gerenciaEquipo">Gerencia</label>
+                                <select class="select2" id="gerenciaEquipo" name="gerenciaEquipo">
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <Area class="form-label" for="areaEquipo">Area</label>
+                                <select class="select2" id="areaEquipo" name="areaEquipo">
+                                    <option value="" disabled selected>Seleccione un área</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label" for="sectorEquipo">Sector</label>
+                                <select class="select2" id="sectorEquipo" name="sectorEquipo">
+                                    <option value="" disabled selected>Seleccione un sector</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row m-t-1" id="tabla_protocolos"> 
+                            <div class="col-md-12">
+                                <h5 class="float-left">Asignación de protocolos</h5><button class="btn btn-sm btn-success float-right" id="agregarProtocolo">Agregar</button>
+                                <table  class="table table-bordered table-striped table-vcenter">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Protocolo</th>
+                                            <th>Id Tipo</th>
+                                            <th>Tipo de protocolo</th>
+                                            <th><center>Acción</center></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cuerpo_protocolos">
+                                    </tbody>
+                                </table>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="guardar_equipo" hidden="true">Guardar</button>
+                <button type="button" class="btn btn-primary" id="guardar_equipo_dinamico" hidden="true">Guardar</button>
+                <button type="button" class="btn btn-primary" id="actualizar_equipo_dinamico" hidden="true" >Actualizar</button>
+                <button type="button" class="btn btn-primary" id="actualizar_equipo" hidden="true" >Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>  

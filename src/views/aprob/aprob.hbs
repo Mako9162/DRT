@@ -1,0 +1,122 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div> 
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Tareas pendientes de aprobación </h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Tareas</li>
+								<li class="active">Tareas pendientes de aprobación</li>
+							</ol>
+						</div>
+						<div class="form-group float-right">
+                            <button type="button" class="btn btn-rounded btn-warning" id="pdfs" name="pdfs" hidden="true" ><i class="fa fa-file-pdf-o"></i></button>
+							<button type="button" class="btn btn-rounded btn-warning" id="pdfs1" name="pdfs1" hidden="true" ><i class="fa fa-file-pdf-o"></i></button>
+						</div>
+					</div>
+				</div>
+			</header>
+			<style>
+				.dataTables_filter {
+					float: left;
+				}
+				.dt-buttons {
+					float: right;
+				}
+				#test:checked + label::before {
+					background-color: #f00;
+					border-color: #f00;
+				}
+			</style>
+			<div class="box-typical box-typical-padding">
+				<section class="card box-typical">
+					<div class="card-block">
+						{{#ifAny user.Id_Perfil "2" "9"}}
+						{{!-- <div class="">
+							<div class="checkbox-toggle m-b-2">
+								<input type="checkbox" id="test">
+								<label for="test">Incluir TEST</label>
+							</div>
+						</div> --}}
+						{{/ifAny}}
+						<table id="tabla_prot1" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+							<thead>
+								<tr>
+									<th>Tarea</th>
+									<th>Fecha</th>
+									<th>Estado de tarea</th>
+									<th>Tipo de servicio</th>
+									<th>Codigo Sapma</th>
+									<th>Tag DMH</th>
+									<th>Gerencia</th>
+									<th>Area</th>
+									<th>Sector</th>
+									<th>Detalle de ubicación</th>
+									<th>Ubicación técnica</th>
+									<th>Estado equipo</th>
+									<th>Observación Estado</th>
+									<th>Repuestos</th>
+									<th hidden="true">Tarea anterior</th>
+									<th hidden="true">Fecha anterior</th>
+									<th hidden="true">Estado anterior</th>
+									<th>Observaciones</th>
+									<th>Ver</th>
+								</tr>
+							</thead>
+							<tbody>
+							{{#each aprob}}
+								<tr>
+									<td>{{IdTarea}}</td>
+									<td>{{FechaTarea}}</td>
+									<td>{{EstadoDesc}}</td>
+									<td>{{TipoServicio}}</td>
+									<td>{{EquipoCodigoTAG}}</td>
+									<td>{{EquipoTagDMH}}</td>
+									<td>{{GerenciaDesc}}</td>
+									<td>{{AreaDesc}}</td>
+									<td>{{SectorDesc}}</td>
+									<td>{{DetalleUbicacion}}</td>
+									<td></td>
+									<td>{{EstadoOperEquipo}}</td>
+									<td>{{EstadoOperEquipoObs}}</td>
+									<td>{{Repuestos}}</td>
+									<td hidden="true">{{IdTarea_Ant}}</td>
+									<td hidden="true">{{FechaTarea_Ant}}</td>
+									<td hidden="true">{{EstadoOperEquipo_Ant}}</td>
+									<td><input class="form-control" id="obs" name="obs" maxlength="300"></input></td>
+									<td><center><a href="/protocolo/{{ IdTarea }}" class="btn btn-inline btn-primary btn-sm ladda-button" target="_blank"><i class="fa fa-file-archive-o"></i></a></center></td>	
+								</tr>
+							{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</section>
+				{{#ifAny user.Id_Perfil "2" "4" "5" "6" "7" "8" "9"}}
+				<button id="aprobar" type="button" class="btn btn-success">Aprobar</button>
+				<button id="rechazar" type="button" class="btn btn-danger float-right">Rechazar</button>
+				{{/ifAny}}
+			</div>
+			{{> codigo_aprobacion2}}
+			{{> codigo_aprobacion3}}
+		</div>
+	</div>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+	<script src="/sessions.js"></script>
+	<script src="aprob.js"></script>
+</body>

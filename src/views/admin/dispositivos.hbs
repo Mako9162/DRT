@@ -1,0 +1,239 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Dispositivos</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+                                <li class="active">Administración</li>
+								<li class="active">Dispositivos</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</header>
+            <style>
+                /* Estilos para el interruptor */
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 50px;
+                    height: 24px;
+                }
+                .switch input { display: none; }
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0; left: 0; right: 0; bottom: 0;
+                    background-color: #ccc;
+                    border-radius: 24px;
+                    transition: .2s;
+                }
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 18px;
+                    width: 18px;
+                    left: 3px;
+                    bottom: 3px;
+                    background-color: white;
+                    transition: .2s;
+                    border-radius: 50%;
+                }
+                input:checked + .slider {
+                    background-color: #4caf50;
+                }
+                input:checked + .slider:before {
+                    transform: translateX(26px);
+                }
+            </style>
+			<div class="box-typical box-typical-padding">
+				<section class="card box-typical">
+					<div class="card-block m-b-1">
+						<div class="col-md-12">
+							<table id="tablaDispositivos" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Descripción</th>
+										<th>Login</th>
+										<th>Ultima comprobación</th>
+										<th>Observaciones</th>
+										<th>Estado</th>
+									</tr>
+								</thead>
+								<tbody></tbody>	
+							</table>
+						</div>
+					</div>
+				</section>
+			</div>
+        </div>
+    </div>    
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+	<script src="/sessions.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaDispositivos').DataTable({
+                "ajax": {
+                    "url": "/get_dispositivos",
+                    "dataSrc": ""
+                },
+                 columns: [
+                    { data: 'Id' },
+                    { data: 'Descripcion' },
+                    { data: 'Login' },
+                    { data: 'Last' },
+                    {
+                    data: 'Obs',
+                        render: function(obs, type, row) {
+                            return `<span class="obs-text text-muted" data-id="${row.Id}">${obs || '—'}</span>`;
+                        }
+                    },
+                    {
+                    data: 'Estado',
+                        orderable: false,
+                        searchable: false,
+                        render: function(estado, type, row) {
+                            // input tipo checkbox con clase y data-id
+                            return `
+                            <label class="switch">
+                                <input type="checkbox"
+                                    class="toggle-estado"
+                                    data-id="${row.Id}"
+                                    ${estado ? 'checked' : ''}>
+                                <span class="slider round"></span>
+                            </label>
+                            `;
+                        }
+                    }
+                ],
+                "bInfo": true,
+                "iDisplayLength": 10,
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                }
+            });
+
+            // Delegamos el evento sobre el body porque los inputs se generan dinámicamente
+            $('body').on('change', '.toggle-estado', function() {
+                const checkbox = $(this);
+                const id = checkbox.data('id');
+                const nuevoEstado = checkbox.is(':checked') ? 1 : 0;
+
+                $.ajax({
+                    url: `/dispositivos/${id}/estado`,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ estado: nuevoEstado }),
+                    success: function(res) {
+                        swal('Sapma', `Estado del dispositivo ${id} actualizado.`, 'success');
+                    },
+                    error: function(err) {
+                        checkbox.prop('checked', !nuevoEstado);
+                        swal('Error', 'Error al actualizar el estado.', 'error');
+                    }
+                });
+            });
+
+            // Cuando el usuario hace click en el texto de observaciones...
+           $('body').on('click', '.obs-text', function() {
+                const span        = $(this);
+                const id          = span.data('id');
+                const valorActual = span.text() === '—' ? '' : span.text();
+
+                const editor = $(`
+                    <div class="obs-editor" data-id="${id}" data-original="${valorActual}">
+                    <div class="input-group input-group-sm">
+                        <textarea class="form-control" rows="2">${valorActual}</textarea>
+                        <div class="input-group-append">
+                        <button class="btn btn-success btn-save" title="Guardar">
+                            <i class="bi bi-check-lg"></i>
+                        </button>
+                        <button class="btn btn-danger btn-cancel" title="Cancelar">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                `);
+
+                span.replaceWith(editor);
+                editor.find('textarea').focus();
+            });
+
+            // Guardar o cancelar la edición
+            $('body').on('click', '.obs-editor .btn-save', function() {
+                const editor    = $(this).closest('.obs-editor');
+                const id        = editor.data('id');
+                const nuevaObs  = editor.find('textarea').val().trim();
+
+                $.ajax({
+                    url: `/dispositivos/${id}/observaciones`,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ observaciones: nuevaObs }),
+                    success: () => {
+                    // Reconstruir el span con el nuevo valor
+                    const texto = nuevaObs || '—';
+                    const span  = $(`<span class="obs-text ${nuevaObs? '' : 'text-muted'}" data-id="${id}">${texto}</span>`);
+                    editor.replaceWith(span);
+                    swal('Sapma', 'Observaciones actualizadas.', 'success');
+                    },
+                    error: () => {
+                    alert('Error al actualizar observaciones.');
+                    }
+                });
+            });
+
+            $('body').on('click', '.obs-editor .btn-cancel', function() {
+                const editor       = $(this).closest('.obs-editor');
+                const id           = editor.data('id');
+                const originalObs  = editor.data('original') || '';
+                const texto        = originalObs || '—';
+                const span         = $(`<span class="obs-text ${originalObs? '' : 'text-muted'}" data-id="${id}">${texto}</span>`);
+                editor.replaceWith(span);
+            });
+
+        });
+    </script>
+</body>
+
+					

@@ -1,0 +1,24 @@
+<div class="modal fade" id="codigoModal2" tabindex="-1" role="dialog" aria-labelledby="codigoModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <br>
+                <h1 class="modal-title text-center" id="codigoModalLabel2">
+                    Para continuar, ingrese el código de verificación enviado al correo electrónico: 
+                    <a href="mailto:{{user.Email}}">{{user.Email}}</a>
+                </h1>
+            </div>
+            <div class="modal-body text-center">
+                <br>
+                <p id="timer2" style="font-size: 1.5em; font-weight: bold;">Tiempo restante: <span id="time2">05:00</span></p>
+                <br>
+                <input type="text" id="codigoInput2" placeholder="Ingrese el código" class="form-control" maxlength="6" style="width: 80%; margin: auto;" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);">
+            </div>
+            <div class="modal-footer">
+                <br>
+                <button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="enviarCodigo2">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

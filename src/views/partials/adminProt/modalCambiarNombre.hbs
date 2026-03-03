@@ -1,0 +1,54 @@
+<div class="modal fade bd-example-modal-lg" id="modalCambiarNombre" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="tituloCambiaNombre"></h3>
+            </div>
+            <div class="modal-body">
+                <form id="formCambiarNombre">
+                    <div class="row">
+                        <div class="form-group col-md-12 m-t-1">
+                            <label class="form-label" for="cambiaNombre">Protocolo:</label>
+                            <input type="text" class="form-control" id="idNombre" name="idNombre" hidden="true" value="" required>
+                            <input type="text" class="form-control" id="cambiaNombre" name="cambiaNombre" value="" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardarCambiarNombre">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Modal header */
+#modalCambiarNombre .modal-header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: #fff;
+    border-bottom: 2px solid #1a252f;
+    padding: 15px 20px;
+    position: relative;
+}
+
+#modalCambiarNombre .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Close button */
+#modalCambiarNombre .close {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 24px;
+    transition: opacity 0.3s ease;
+}
+
+#modalCambiarNombre .close:hover {
+    opacity: 1;
+}
+</style>

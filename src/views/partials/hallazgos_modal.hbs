@@ -1,0 +1,63 @@
+<div class="modal fade bd-example-modal-lg" id="hallazgos_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h3 class="modal-title" id="titulo_hallazgo"></h3>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <section class="card box-typical">
+                        <div class="card-block">
+                            <div class="col-md-12">
+                                <label class="form-label">Observación técnico</label>
+                                <div class="textarea-container" style="position: relative;">
+                                    <textarea class="form-control" id="f_obsTecnico" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 m-t-1">
+                                <input type="text" id="f_id" hidden="true">
+                                <label class="form-label">Hallazgo</label>
+                                <div class="textarea-container" style="position: relative;">
+                                    <textarea class="form-control" id="f_hallazgo" rows="3" placeholder="Ingrese la información relacionada al hallazgo..." maxlength="300"></textarea>
+                                    <span id="hallazgo_contador" style="position: absolute; bottom: 5px; right: 10px; background: rgba(255,255,255,0.8); padding: 2px 5px;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 m-t-1">
+                                <label class="form-label">Plan de acción</label>
+                                <div class="textarea-container" style="position: relative;">
+                                    <textarea class="form-control" id="f_plan" rows="3" placeholder="Detalle el plan de acción correspondiente..." maxlength="300"></textarea>
+                                    <span id="plan_contador" style="position: absolute; bottom: 5px; right: 10px; background: rgba(255,255,255,0.8); padding: 2px 5px;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label">Vulnerabilidad</label>
+                                <select class="form-control" id="f_vulnerabilidad">
+                                    <option value="" disabled selected>Seleccione vulnerabilidad</option>
+                                    <option value="Alta">Alta</option>
+                                    <option value="Media">Media</option>
+                                    <option value="Baja">Baja</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label">Responsable</label>
+                                <input type="text" class="form-control" id="f_responsable" placeholder="Ingrese el nombre del responsable" maxlength="20">
+                            </div>
+                            <div class="col-md-4 m-t-1">
+                                <label class="form-label">Fecha de compromiso</label>
+                                <input type="date" class="form-control" id="f_fecha">
+                            </div>
+                        </div>    
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="guardar_hallazgo" hidden="true">Guardar</button>
+                    <button type="button" class="btn btn-danger" id="eliminar_hallazgo" hidden="true">Eliminar</button>
+                    <button type="button" class="btn btn-warning" id="actualizar_hallazgo" hidden="true">Actualizar</button>
+                </div>  
+            </form>
+        </div>  
+    </div>
+</div> 

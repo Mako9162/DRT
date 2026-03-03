@@ -1,0 +1,143 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Usuarios</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Usuarios</li>
+							</ol>
+						</div>
+						<div>
+							<button type="button" id="btnCrear" class="btn btn-inline btn-primary float-right">Nuevo</button>
+						</div>
+					</div>
+				</div>
+			</header>
+			<style>
+				/* Estilos para el switch */
+				.switch {
+					position: relative;
+					display: inline-block;
+					width: 50px;
+					height: 25px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: red; /* Desactivado */
+					transition: .4s;
+					border-radius: 25px;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 21px;
+					width: 21px;
+					left: 2px;
+					bottom: 2px;
+					background-color: white;
+					transition: .4s;
+					border-radius: 50%;
+				}
+
+				input:checked + .slider {
+					background-color: rgb(8, 228, 8); /* Activado */
+				}
+
+				input:checked + .slider:before {
+					transform: translateX(25px);
+				}
+
+			</style>
+			<div class="box-typical box-typical-padding">
+				{{#ifAny user.Id_Perfil "2" "9"}}	
+				<table id="tabla_users" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Usuario</th>
+							<th>Nombre</th>
+							<th>Perfil</th>
+							<th>Email</th>
+							<th>Telefono</th>
+							<th class="text-center">Estado</th>
+							<th class="text-center">Editar</th>
+							<th class="text-center">Acción</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each users}}
+						<tr>
+							<td>{{Id}}</td>
+							<td>{{Login}}</td>
+							<td>{{Descripcion}}</td>
+							<td>{{Perfiles}}</td>
+							<td>{{Email}}</td>
+							<td>{{Telefono}}</td>
+							{{#ifEquals Estado "1"}}
+								<td class="text-center">
+									<span class="label label-success">Activo</span>
+								</td>
+								<td class="text-center"><a href="/users/edit/{{Id}}" type="button" id="btneditar" class="btn btn-inline btn-warning btn-sm ladda-button"><i class="fa fa-edit"></i></a></td>
+							{{else}}
+								<td class="text-center">
+									<span class="label label-danger">Inactivo</span>
+								</td>	
+								<td class="text-center"><a href="/users/edit/{{Id}}" type="button" id="btneditar" class="btn btn-inline btn-warning btn-sm ladda-button disabled"><i class="fa fa-edit"></i></a></td>
+							{{/ifEquals}}
+							<td class="text-center">
+								<label class="switch">
+									<input type="checkbox" id="estadoSwitch_{{Id}}" onclick="toggleEstado({{Id}})" {{#ifEquals Estado "1"}}checked{{/ifEquals}}>
+									<span class="slider"></span>
+								</label>
+							</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+				{{/ifAny}}
+			</div>
+			<style>
+				.dataTables_filter {
+					float: left;
+				}
+				.dt-buttons {
+					float: right;
+				}
+			</style>
+		</div>
+		 {{> modal_users}}  
+	</div>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+	<script src="/users.js"></script>
+	<script src="/sessions.js"></script>
+</body>

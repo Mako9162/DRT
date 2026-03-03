@@ -1,0 +1,194 @@
+<div class="modal fade bd-example-modal-lg" id="modalCrearProt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="tituloCrearProt"></h3>
+            </div>
+            <div class="modal-body">
+                <form id="formNuevoProt">
+                    <div class="row">
+                        <div class="form-group col-md-4 m-t-1 ">
+                            <label class="form-label" for="nTipoProt">Seleccione un tipo de protocolo:</label>
+                            <select class="form-control" id="nTipoProt" name="nTipoProt" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                {{#each tipoProtocolo}}
+                                    <option value="{{ID}}">{{DESCRIPCION}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 m-t-1">
+                            <label class="form-label" for="nTipoEquipo">Seleccione un tipo de equipo:</label>
+                            <select class="form-control" id="nTipoEquipo" name="nTipoEquipo" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                {{#each tipo_equipo}}
+                                    <option value="{{ID}}">{{DESCRIPCION}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 m-t-1">
+                            <label class="form-label" for="nNewProt">Nuevo protocolo:</label>
+                            <input type="text" class="form-control" id="nNewProt" name="nNewProt" placeholder="Ingrese el nombre del nuevo protocolo" required>
+                        </div>
+                    </div>
+                    <div id="nuevoProtEstructura"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="btnCrearProt">
+                    <i class="fa fa-save"></i> Crear Protocolo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+/* Modal container */
+#modalCrearProt .modal-dialog {
+    max-width: 1200px;
+    width: 95% auto;
+    margin: 30px auto;
+}
+
+/* Modal header */
+#modalCrearProt .modal-header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: #fff;
+    border-bottom: 2px solid #1a252f;
+    padding: 15px 20px;
+    position: relative;
+}
+
+#modalCrearProt .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Tabs */
+#modalCrearProt .nav-tabs {
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    flex-wrap: nowrap; /* no permitir que se vaya a otra fila */
+    overflow-x: auto;
+    background: #f8f9fa;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
+}
+
+#modalCrearProt .nav-tabs > li > a {
+    font-weight: 600;
+    color: #2c3e50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+    background: #e9ecef;
+    cursor: pointer;
+
+    white-space: nowrap;  /* evita que el texto se rompa */
+    text-overflow: ellipsis; /* si es demasiado largo, muestra "..." */
+    overflow: hidden;
+    max-width: 200px; /* opcional: limita ancho máximo de la pestaña */
+}
+
+
+#modalCrearProt .nav-tabs > li.active > a,
+#modalCrearProt .nav-tabs > li > a:hover {
+    background: #fff;
+    color: #2c3e50;
+    border: none;
+    border-bottom: 2px solid #3498db;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal body con scroll */
+#modalCrearProt .modal-body {
+    max-height: calc(80vh - 120px); /* Ajusta 80% de la ventana menos cabecera */
+    overflow-y: auto;
+    padding: 15px;
+}
+
+/* Tab content */
+#modalCrearProt .tab-content {
+    padding: 0; /* Padding dentro de modal-body suficiente */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+#modalCrearProt .tab-pane {
+    display: none; /* Todas ocultas por defecto */
+}
+
+#modalCrearProt .tab-pane.active {
+    display: block; /* Solo la activa se muestra */
+    padding: 15px; /* Padding interno de cada tab */
+}
+
+/* Form groups */
+#modalCrearProt .form-group {
+    background: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+#modalCrearProt .form-group:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#modalCrearProt label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+#modalCrearProt select.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+#modalCrearProt select.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Checkbox normal */
+#modalCrearProt input[type="checkbox"] {
+    accent-color: #3498db; 
+    cursor: pointer;
+}
+
+/* Cuando está chequeado */
+#modalCrearProt input[type="checkbox"]:checked {
+    accent-color: #080808; 
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #modalCrearProt .modal-dialog {
+        width: 90%;
+    }
+    #modalCrearProt .nav-tabs > li > a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    #modalCrearProt .form-group {
+        margin-bottom: 15px;
+    }
+}
+</style>

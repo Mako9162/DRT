@@ -1,0 +1,224 @@
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    .button-87 {
+        margin: auto;
+        padding: 10px 25px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 500;
+        box-shadow: 0px 0px 14px -7px rgba(141, 153, 174, 1);
+        background-image: linear-gradient(45deg, rgba(39, 55, 70, 1) 0%, rgb(80, 88, 101) 51%, rgba(39, 55, 70, 1) 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-87:hover {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-87:active {
+        transform: scale(0.95);
+    }
+
+    .button-home {
+        margin: auto;
+        padding: 10px 25px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 500;
+        box-shadow: 0px 0px 14px -7px rgba(141, 153, 174, 1);
+        background-image: linear-gradient(45deg, rgba(39, 55, 70, 1) 0%, rgb(80, 88, 101) 51%, rgba(39, 55, 70, 1) 100%);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-home:hover {
+        background-color: darkred;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-home:active {
+        transform: scale(0.95);
+    }
+
+
+    #login-image {
+        background-image: url('sapmaLogin.png');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    /* Centrar el formulario en la columna */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* Asegurarse de que ocupe todo el alto de la pantalla */
+    }
+
+    .form-box {
+        width: 100%;
+        max-width: 400px;
+        /* Ajusta el ancho máximo del formulario */
+    }
+
+    /* Media queries para pantallas pequeñas */
+    @media (max-width: 768px) {
+        #login-image {
+            display: none;
+        }
+
+        .form-container {
+            height: auto;
+            /* Restablecer la altura en pantallas pequeñas */
+            margin-top: 50px;
+            /* Añadir un poco de margen superior para separar el contenido */
+        }
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center; /* Centra ambos botones horizontalmente */
+        gap: 5px; /* Espacio entre los botones */
+    }
+
+    .button-home, .button-87 {
+        display: inline-block;
+    }
+
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Columna izquierda con el formulario -->
+        <div class="col-md-6 form-container">
+            <div class="form-box">
+                <div class="form-group">
+                    <div>
+                        <center><img src="2.png" alt="" id="imgtipo" style="width: 30%;"></center>
+                    </div>
+                    <br><br>
+                    <center><a>Para recuperar su contraseña, ingrese su correo electrónico.</a></center>
+                    <br>
+                    <input type="email" id="recuperar" name="recuperar" class="form-control" placeholder="e-mail" />
+                </div>
+                <br>
+                <div class="button-container">
+                    <button type="button" class="button-home" id="volver">Volver</button>
+                    <button type="button" class="button-87" id="enviar">Enviar</button>
+                </div>
+                <hr>
+                <center><a class="">© 2025 Innovación y Desarrollo</a></center>
+            </div>
+        </div>
+
+        <!-- Columna derecha con la imagen (solo visible en pantallas grandes) -->
+        <div class="col-md-6 hidden-xs hidden-sm" id="login-image">
+        </div>
+    </div>
+</div>
+<script src="/js/lib/jquery/jquery.min.js"></script>
+<script src="/js/lib/tether/tether.min.js"></script>
+<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/lib/datatables-net/datatables.min.js"></script>
+<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script src="/js/lib/summernote/summernote.min.js"></script>
+<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/summernote-ES.js"></script>
+<script src="/js/lib/select2/select2.full.min.js"></script>
+<script src="/js/lib/match-height/jquery.matchHeight.min.js"></script>
+<script src="/js/lib/moment/moment-with-locales.min.js"></script>
+<script src="/js/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/lib/fullcalendar/fullcalendar.min.js"></script>
+<script src="/js/lib/fullcalendar/scheduler.min.js"></script>
+<script src="/js/lib/fullcalendar/lang-all.js"></script>
+<script type="text/javascript" src="/js/lib/match-height/jquery.matchHeight.min.js"></script>
+<script>
+    $(function () {
+        $('.page-center').matchHeight({
+            target: $('html')
+        });
+
+        $(window).resize(function () {
+            setTimeout(function () {
+                $('.page-center').matchHeight({ remove: true });
+                $('.page-center').matchHeight({
+                    target: $('html')
+                });
+            }, 100);
+        });
+
+    });
+
+    $(document).ready(function () {
+        
+        $('#enviar').on('click', function () {
+            var email = $('#recuperar').val();
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email == '') {
+                swal("Error", "Ingrese un correo electrónico", "error");
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                swal("Error", "Ingrese un correo electrónico válido", "error");
+                return;
+            }
+
+            $.ajax({
+                url: '/correo',
+                type: 'POST',
+                data: { email: email },
+                success: function (response) {
+                    if (response.exists) {
+                        swal("Atención", "Se ha enviado un correo electrónico con sus datos de para inciar sesión a: " + email + "", "success");
+                        setTimeout(function () {
+                            window.location.href = '/';
+                        }, 2000);
+                    } else {
+                        swal("Error", "El correo electrónico no está registrado.", "error");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    swal("Error", "Ocurrió un error al procesar la solicitud.", "error");
+                }
+            });
+        });
+
+        $('#volver').on('click', function () {
+            window.location.href = '/home';
+        });
+
+    });
+
+</script>
+<script src="/js/app.js"></script>

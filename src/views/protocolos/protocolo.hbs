@@ -1,0 +1,161 @@
+<body class="with-side-menu">
+	{{> navbar }}
+	<div class="mobile-menu-left-overlay-"></div>
+	{{> nav }}
+	<div class="page-content">
+		<div class="container-fluid">
+			<header class="section-header">
+				<div class="tbl">
+					<div class="tbl-row">
+						<div class="tbl-cell">
+							<h3>Protocolo Nº {{IDT}}</h3>
+							<ol class="breadcrumb breadcrumb-simple">
+								<li><a href="/home">Inicio</a></li>
+								<li class="active">Detalle de Protocolo</li>
+							</ol>
+						</div>
+						<div class="form-group float-right">
+                            <button type="button" class="btn btn-danger" onclick="window.close()" >Volver</button>
+                        </div>
+					</div>
+				</div>
+			</header>
+			<style>
+				table {
+					width: 100%;
+					border-collapse: collapse;
+				}
+
+				th, td {
+					border: 1px solid black;
+					padding: 10px;
+				}
+
+				th {
+					background-color: #f2f2f2;
+				}
+				.logo{
+					width: 200px;
+					height: 100px;
+				}
+			</style>
+			<div class="box-typical box-typical-padding">
+				<div class="form-group">
+					<a href="/pdf/{{IDT}}/{{TR_EQUIPO_COD}}"><button type="button" class="btn btn-warning float-right" id="pdf" name="pdf"><i class="fa fa-file-pdf-o"></i></button></a>
+				</div>
+				<br><br>	
+				<section class="card box-typical" id="tabla_prot11">
+					<div class="card-block">
+						<div class="card-header">
+							<div class="col-md-4">
+								<img src="/img/imagen1.png" class="img-fluid" >
+							</div>
+							<div class="col-md-8 b-l">
+								<label><h5><strong>PROTOCOLO Nº: {{IDT}} / {{fixEncoding TR_PROT_DESC_TAREATIPO}} / {{TR_TIPO_EQUIPO}}</strong></h5></label>
+								<label><h6><strong>CODIGO SAPMA / TAG DMH: </strong>{{TR_EQUIPO_COD}} / {{TR_TAG_DMH}}</h6></label>
+								<label><h6><strong>GERENCIA: </strong>{{TR_GERENCIA}}</h6></label>
+								<label><h6><strong>AREA: </strong>{{TR_AREA}}</h6></label>
+								<label><h6><strong>SECTOR: </strong>{{TR_SECTOR}}</h6></label>
+								<label><h6><strong>ESTADO: </strong>{{TR_ESTADO}}</h6></label>
+							</div>
+						</div>
+						<div class="card-body">
+							{{#if tarea_origen}}
+								<div class="card-body">
+									<div class="col-md-12 m-t-3 b-b" >
+
+										<h5 class="card-title"><strong>INFORMACION DE PROTOCOLO ORIGEN </strong></h5>
+									</div>
+									<div class="col-md-4 m-t-2">
+										<label><strong>01. Protocolo N° : {{tarea_origen}} / {{protocolo_origen}}</strong></label>
+										<br>
+									</div>
+									<div class="col-md-4 m-t-2">
+										<label><strong>02. Estado : {{estado_origen}}</strong></label>
+										<br>
+									</div>
+									<div class="col-md-4 m-t-2">
+										<label><strong>03. Observaciones EST : {{obs_origen}}</strong></label>
+										<br>
+									</div>
+								</div>
+							{{/if}}
+							{{#if imagenes_origen }}
+								<div class="col-md-12 m-t-3 b-b" >
+									<h5 class="card-title"><strong>IMAGENES PROTOCOLO ORIGEN</strong></h5>
+								</div>
+									{{#each imagenes_origen }}
+										<div class="col-md-4 m-t-2">
+											<div class="imgti">
+												<h6>Adjunto {{incitement @index}}</h6>
+											</div>
+											<div class="image-wrapper">
+												<img src="{{this}}" class="img-fluid" alt="Responsive image" width="300" height="300">
+												<a href="{{this}}" target="blank">Ver Imagen {{incitement @index}}</a>
+											</div>
+										</div>
+									{{/each }}
+							{{/if}}
+							{{#group prot by="TR_PROT_DESC_CAPI"}}
+								<div class="col-md-12 m-t-3 b-b" >
+									<h5 class="card-title"><strong>{{value}}</h5>
+								</div>
+								{{#each items as |item|}}
+										<div class="col-md-4 m-t-2">
+											<label><strong>{{ TR_PROT_CAPTURA}}</strong> : {{fixEncoding TR_RESPUESTA}}</label>
+											<br>
+										</div>
+								{{/each}}
+							{{/group}}
+							{{#if imagenes}}
+							<div class="col-md-12 m-t-3 b-b" >
+								<h5 class="card-title"><strong>IMAGENES</strong></h5>
+							</div>
+
+							<div class="container m-t-2"></div>
+								{{#each imagenes }}
+									<div class="col-md-4 m-t-2">
+										<div class="imgti">
+											<h6>Adjunto {{incitement @index}}</h6>
+										</div>
+										<div class="image-wrapper">
+											<img src="{{this}}" class="img-fluid" alt="Responsive image" width="300" height="300">
+											<a href="{{this}}" target="blank">Ver Imagen {{incitement @index}}</a>
+										</div>
+									</div>
+								{{/each }}
+							</div>
+							{{/if}}
+							<div class="footer">
+								<div class="col-md-12 m-t-3 b-b" >
+									<h5 class="card-title"><strong>APROBACIONES</h5>
+								</div>
+								<div class="col-md-4 m-t-3" >
+									<label><strong>Lider Turno: {{#if turno}}<strong> {{turno}}  /  {{fechaturno}}</label>{{/if}}
+								</div>
+								<div class="col-md-4 m-t-3" >
+									<label><strong>Lider SPCI: {{#if spci}}<strong> {{spci}}  /  {{fechaspci}}</label>{{/if}}
+								</div>
+								<div class="col-md-4 m-t-3" >
+									<label><strong>Cliente: {{#if clienteAprob}}<strong> {{clienteAprob}}  /  {{fechacliente}}</label>{{/if}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+	    </div>
+	</div>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<script src="/js/lib/tether/tether.min.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/lib/datatables-net/datatables.min.js"></script>
+	<script src="/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+	<script src="/js/lib/summernote/summernote.min.js"></script>
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script> 
+	<script src="/js/summernote-ES.js"></script>
+	<script src="/js/lib/select2/select2.full.min.js"></script>
+	<script src="/sessions.js"></script>
+</body>
