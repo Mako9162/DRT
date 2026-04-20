@@ -10,6 +10,7 @@ const { database } = require('./keys.js');
 const cors = require('cors');
 const fs = require('fs');
 const max = path.resolve(__dirname, "./maximo.txt");
+const { encodingMiddleware } = require('./lib/encodingMiddleware.js');
 require('./routes/cronJobs');
 require('./routes/cronJobs1');
 require('./routes/cronJobs2');
@@ -32,6 +33,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'views', 'js')));
 
 // Middlewares
+app.use(encodingMiddleware);
 app.use(cors());
 app.use(session({
     secret: 'sapma',
